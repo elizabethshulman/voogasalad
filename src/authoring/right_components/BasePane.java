@@ -30,10 +30,13 @@ public class BasePane implements GUINode {
 	}
 	
 	protected VBox buildBasicView(String title) {
-		VBox masterBox = new VBox();
+		VBox masterBox = new VBox(AuthRes.getInt("VBPadding"));
         masterBox.setPrefWidth(AuthRes.getInt("PrefBaseSize"));
-        masterBox.setPadding(new Insets(20, 30, 20 ,30));
-        masterBox.setSpacing(20);
+        masterBox.setPadding(new Insets(
+				        		AuthRes.getInt("VBVerticalInset"), 
+				        		AuthRes.getInt("VBHorizontalInset"), 
+				        		AuthRes.getInt("VBVerticalInset"),
+				        		AuthRes.getInt("VBHorizontalInset")));
 		masterBox.getStyleClass().add("pane-back");
 		if(title!=null) {
 			buildHeader(title, masterBox);
@@ -52,7 +55,7 @@ public class BasePane implements GUINode {
 	 * Method for adding buttons to the Pane. Overwritten by subclasses
 	 * @return List<Node>
 	 */
-	public List<Node> getButtonArray() {
+	protected List<Node> getButtonArray() {
 		List<Node> list = new ArrayList<>();
 		return list;
 	}
@@ -61,11 +64,10 @@ public class BasePane implements GUINode {
 	 * Method that adds lines
 	 * @return Separator
 	 */
-	public Separator newSeparator() {
+	protected Separator newSeparator() {
 		Separator line = new Separator();
 		line.setHalignment(HPos.CENTER);
-		line.setPrefWidth(AuthRes.getInt("PrefBaseSize") * 2.0/3);
+		line.setPrefWidth(AuthRes.getInt("PrefSeparatorWidth"));
 		return line;
 	}
-
 }
